@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Nav from "./components/Nav";
+import { List } from "./components/List";
+import SearchBtn from "./components/Search";
+import SaveBtn from "./components/Save";
 
 class App extends Component {
   render() {
@@ -13,6 +17,10 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <Nav />
+        <List />
+        <SaveBtn />
+        <SearchBtn />
       </div>
     );
   }
