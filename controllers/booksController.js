@@ -28,6 +28,7 @@ module.exports = {
 
     // DELETE "/api/books/:id"
     remove : function(req, res) {
+        db.Book
         .findById ( { _id: req.params.id })
         .then( deletedBook => deletedBook.remove())
         .then( deletedBook => res.json(deletedBook))
