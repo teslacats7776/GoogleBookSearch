@@ -1,11 +1,7 @@
 const router = require("express").Router();
+const bookRoutes = require("./books");
 
+// Book routes
+router.use("/books", bookRoutes);
 
-// Matches with "api/books"
-router.route("/")
-
-
-// Matches with "/api/books/:id"
-router 
-    .route("/:id")
-    .get()
+module.exports = router;
