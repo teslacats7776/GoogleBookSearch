@@ -7,7 +7,7 @@ function SearchBtn(props) {
   return (
     <span className="search-btn" {...props} role="button" tabIndex="0">
     
-          <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         
     </span> 
   );
