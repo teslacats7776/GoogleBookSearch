@@ -8,7 +8,7 @@ import Nav from "./components/Nav";
 // import SaveBtn from "./components/Save";
 import searchPage from "./pages/searchPage"
 
-function(App) {
+function App () {
   return(
     <Router>
       <div>
