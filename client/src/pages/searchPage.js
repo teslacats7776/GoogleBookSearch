@@ -1,87 +1,75 @@
-import React, { Component } from "react";
-import searchBtn from "../components/Search/Search";
-import Jumbotron from "../components/Jumbotron/Jumbotron";
-import { Link } from "react-router-dom";
-import API from "../utils/API";
-import Input from "../components/Input/input";
-import {Container, Row} from "../components/Grid"
-import {List, ListItem} from "../components/List/List"
+import React from "react";
+import Form from "../components/Form";
+import Results from "../components/Result";
+import API from "../utils/API"
 
 
-class Books extends Component {
+class Search extends Component {
 
     state ={
-        books: [],
-        title: "",
-        author: "",
-        synopsis: ""
+        value: "",
+        books: []
     };
 
-    // Invoke loadBook function immediately when components are rendered to DOM
+    // Invoke searchBook function immediately when components are rendered to DOM
     componentDidMount() {
-        this.loadBooks();
+        this.searchBooks();
     }
 
-    loadBooks = () => {
-        API.getBooks()
-        .then(res =>{
-            this.setState({
-                books: res.data, title: "", author: "", synopsis: "" 
-            })
-        }).catch(err => console.log(err))
+    makeBook = bookData => {
+        return {
+            _id: bookData.id,
+            title: bookData.volumeInfo.title,
+            authors: bookData.volumeInfo.authors,
+            description: bookData.volumeInfo.description,
+            image: bookData.volumeInfo.imageLinks.thumbnail,
+            link: bookData.volumeInfo.previewLink
+        }          
     }
 
-    handleInput = event => {
-        const {name, value} = event.target;
+    // Query API 
+    searchBooks = query => {
+        API.getBook(query)
+        .then(res => this.setState({
+                books: res.data.items.map(bookData => this.makeBook(bookData)) 
+            }))
+            .catch(err => console.log(err))
+    }
+
+    handleInputChange = event => { //Compare with Form
+        const name = event.target.name;
+        const value = event.target.value;
         this.setState( {
             [name]:value
-        })
-    }
+        });
+    };
 
-    handleSearchBtn = event => {
-        event.preventDefault();
+    handleFormSubmit = event => { // Compare with Form
+        event.preventDefault(); //prevent the page to reload after hit search btn 
 
-            API.getBook(this.props.match.params.id)
-            .then(res =>{
-                this.setState({books: res.data})
-            }).catch(err => console.log(err))
+        this.searchBooks(this.state.search)
     }
 
 
     render () {
 
         return(
-            
-          <Container fluid>
+            <div>
+                <Form 
+                    search = {this.state.search}
+                    handleInputChange = {this.handleInputChange}
+                    handleFormSubmit = {this.handleFormSubmit}
+                />
 
-            <Jumbotron>
-                <h1>Google Book Search</h1>
-                <h3>Search for books on the Internet</h3>
-            </Jumbotron>
-
-            {/* Search Div */}
-            <Row>
-              <form>
-                <Input
-                  value = {this.state.title}
-                  onChange = {this.handleSearchBtn}
-                  name = "title"
-                  placeholder = "Title (required)" />
-
-                <searchBtn
-                 onClick = {this.handleSearchBtn}/>
-              </form>
-            </Row>
-
-            {/* Render Book List */}
-
-
-          </Container>
-        );
-
+                <div className="container">
+                    <h2>Results</h2>
+                    <Results 
+                        books = {this.state.books}
+                    />
+                </div>
+            </div>
+        )
     }
-
-
 }
 
-export default Books;
+export default Search;
