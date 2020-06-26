@@ -6,7 +6,7 @@ import React from "react";
 function SaveBtn(props) {
   return (
     <span className="save-btn" {...props} role="button" tabIndex="0">
-      ✗
+      <button type="button" className="btn btn-warning">Save the Book</button>
     </span>
   );
 }
