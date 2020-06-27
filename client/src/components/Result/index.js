@@ -48,11 +48,11 @@ class Results extends Component {
 
                                     <div className="col-md-10">
                                         <div className="card-body">
-                                            <h5 className="card-title"> {result.title} BY {result.authors}</h5>
+                                            <h5 className="card-title"> {result.title} - BY - {result.authors}</h5>
                                             <p className="card-text"> {result.description}</p>
 
                                             <div>
-                                                <a href= {result.link} className="btn badge-pill btn-outline-dark mt-3" target="_blank" >View</a>
+                                                <a href= {result.link} className="btn badge-pill btn-outline-dark mt-3" >View</a>
 
                                                 <button 
                                                     className="btn badge-pill btn-outline-warning mt-3 ml-3" 
