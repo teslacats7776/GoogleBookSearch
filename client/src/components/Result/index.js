@@ -17,9 +17,9 @@ class Results extends Component {
 
     handleSave = book => {
 
-        if(this.state.savedBooks.map(book => book._id).includes(books._id)) {
+        if(this.state.savedBooks.map(book => book._id).includes(book._id)) {
             API.deleteBook(book._id)
-            .then(deleteBook => this.setState({ savedBooks: this.state.savedBooks.filter(book => book._id !== deletedBook._id)}))
+            .then(deleteBook => this.setState({ savedBooks: this.state.savedBooks.filter(book => book._id !== deleteBook._id)}))
             .catch(err => console.log(err));
 
         } else {

@@ -4,7 +4,7 @@ import Results from "../components/Result";
 import API from "../utils/API"
 
 
-class Search extends Component {
+class Search extends React.Component {
 
     state ={
         value: "",
