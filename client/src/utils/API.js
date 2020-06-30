@@ -14,12 +14,12 @@ export default
     },
 
     //Save a book 
-    saveBook: function(bookId) {
-        return axios.post("/api/books" + bookId).then(result => result.data);
+    saveBook: function(bookData) {
+        return axios.post("/api/books", bookData).then(result => result.data);
     }, 
 
     // Get the saved books from the database
-    savedBooks: function () {
+    getAllSavedBooks: function () {
         return axios.get("/api/books").then(result => result.data);
     }
 };

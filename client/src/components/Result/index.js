@@ -5,18 +5,27 @@ class Results extends Component {
 
     //Initial state
     state = {
-        savedBooks: [] //Savedbook is empty 
+        savedBooks: [], //Savedbook is empty 
+        status : ""
     }
 
     //When we start the web browser, update the state of the savedBooks array
     componentDidMount () {
-        API.savedBooks()
+        API.getAllSavedBooks()
         .then(savedBooks => this.setState({ savedBooks : savedBooks}))
         .catch(err => console.log(err))
     }
 
-    handleSave = book => {
-
+    handleSave = (book) => {
+        console.log("result",book)
+        const bookData = {
+            title: book.title,
+            author: book.authors,
+            synopsis: book.description,
+            image: book.image,
+            link: book.link
+        }
+        console.log(this.state.status)
         if(this.state.savedBooks.map(book => book._id).includes(book._id)) {
             API.deleteBook(book._id)
             .then(deleteBook => this.setState({ savedBooks: this.state.savedBooks.filter(book => book._id !== deleteBook._id)}))
@@ -24,10 +33,10 @@ class Results extends Component {
 
         } else {
 
-            API.saveBook(book)
+            API.saveBook(bookData)
             .then(savedBook => this.setState({ savedBooks: this.state.savedBooks.concat([savedBook])}))
             .catch(err => console.log(err))
-        }
+         }
     }
 
     render () {
@@ -62,6 +71,11 @@ class Results extends Component {
                                                         book => book._id
                                                     ).includes(result._id) ? "Unsave" : "Save"
                                                     }
+
+                                                    {/* {this.state.savedBooks.map(
+                                                        book => book._id
+                                                    ).includes(result._id) ? this.setState({status: "unsaved"}) : this.setState({status: "Saved"})
+                                                    }    */}
                                                 </button>
                                             </div>
                                         </div>

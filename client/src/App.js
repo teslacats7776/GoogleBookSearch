@@ -8,7 +8,7 @@ import Wrapper from "./components/Wrapper"
 
 //Import Pages
 import Search from "./pages/searchPage"
-import Save from "./pages/savePage"
+import Saved from "./pages/savePage"
 
 import "./App.css";
 
@@ -23,7 +23,7 @@ class App extends Component {
           <Wrapper>
             <Route exact path = "/" component = {Search} />
             <Route exact path = "/search" component = {Search} />
-            <Route exact path = "/save" component = {Save} />
+            <Route exact path = "/saved" component = {Saved} />
           </Wrapper>
         </div>
       </Router>

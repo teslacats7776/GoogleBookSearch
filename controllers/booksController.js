@@ -21,6 +21,7 @@ module.exports = {
 
     // POST "api/books"
     create: function(req, res) {
+        console.log(req.body)
         db.Book
         .create(req.body)
         .then(dbSaved => res.json(dbSaved))
