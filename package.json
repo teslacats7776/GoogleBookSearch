@@ -8,10 +8,11 @@
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
-    "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "postinstall": "npm run seed",
+    "heroku-postbuild": "npm run build",
+    "seed": "cd seeds && node seed.js"
   },
   "author": "",
   "license": "ISC",
